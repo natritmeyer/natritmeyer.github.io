@@ -2,9 +2,9 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://natritmeyer.github.io
-title: Nat Ritmeyer's Blog
-subtitle: A blogging framework for hackers.
+url: http://natritmeyer.com
+title: Nat Ritmeyer's blog
+subtitle: Test automation, ruby and stuff
 author: Nat Ritmeyer
 simple_search: http://google.com/search
 description:
