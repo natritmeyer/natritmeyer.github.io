@@ -9,7 +9,7 @@
   <meta name="author" content="Nat Ritmeyer">
 
   
-  <meta name="description" content="Blog Archive About Me A little something about me. Recent Posts GitHub Repos Status updating... @natritmeyer on GitHub $(document).ready(function &hellip;">
+  <meta name="description" content="Blog Archive About Me A little something about me. Recent Posts Stack Overflow Coderwall Status updating... var coderwall = (function(){ function &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -98,6 +98,69 @@
   <ul id="recent_posts">
     
   </ul>
+</section>
+
+<section>
+  <h1>Stack Overflow</h1>
+  <p>
+  <a href="http://stackoverflow.com/users/2032500/nat-ritmeyer"><img src="http://stackoverflow.com/users/flair/2032500.png" width="208" height="58" alt="profile for nat-ritmeyer at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for nat-ritmeyer at Stack Overflow, Q&amp;A for professional and enthusiast programmers"></a>
+  </p>
+</section>
+
+<section>
+  <h1>Coderwall</h1>
+  <ul id="cw_badges">
+    <li class="loading">Status updating...</li>
+  </ul>
+
+  <script type="text/javascript">
+    var coderwall = (function(){
+      function render(options, badges){
+        var fragment = '',
+            t = $(options.target),
+            height = 65,
+            width = 65,
+            index;
+
+        for (index in badges) {
+          fragment += '<a class="cw_badge"title="' + badges[index].description + '" href="http://coderwall.com/' + options.user + '">';
+          fragment +=   '<img alt="' + badges[index].description + '" height="' + width + '" width="' + height + '" src="' + badges[index].badge + '"/>';
+          fragment += '</a>';
+        }
+
+        t.html(fragment);
+      }
+      return {
+        showBadges: function(options){
+          $.ajax({
+              url: 'http://coderwall.com/' + options.user + '.json?callback=?'
+            , dataType: 'jsonp'
+            , error: function (err) { $(options.target + ' li.loading').addClass('error').text("Error loading feed"); }
+            , success: function(res) {
+                render(options, res.data.badges);
+            }
+          });
+        }
+      };
+    })();
+
+    $(document).ready(function(){
+      coderwall.showBadges({
+        user: 'natritmeyer',
+        target: '#cw_badges'
+      });
+    });
+  </script>
+  <style type="text/css">
+    .cw_badge img {
+      padding: 5px;
+      border: 0 none !important;
+      -moz-box-shadow: none !important;
+      -webkit-box-shadow: none !important;
+      -o-box-shadow: none !important;
+      box-shadow: none !important;
+    }
+  </style>
 </section>
 
 <section>
