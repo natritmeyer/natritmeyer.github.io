@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Nat Ritmeyer's blog]]></title>
+  <title><![CDATA[NatRitmeyer.com]]></title>
   <link href="http://natritmeyer.com/atom.xml" rel="self"/>
   <link href="http://natritmeyer.com/"/>
-  <updated>2013-08-28T13:29:29+01:00</updated>
+  <updated>2013-08-28T21:48:48+01:00</updated>
   <id>http://natritmeyer.com/</id>
   <author>
     <name><![CDATA[Nat Ritmeyer]]></name>
