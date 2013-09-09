@@ -4,7 +4,7 @@
   <title><![CDATA[NatRitmeyer.com]]></title>
   <link href="http://natritmeyer.com/atom.xml" rel="self"/>
   <link href="http://natritmeyer.com/"/>
-  <updated>2013-08-28T21:48:48+01:00</updated>
+  <updated>2013-09-09T20:12:53+01:00</updated>
   <id>http://natritmeyer.com/</id>
   <author>
     <name><![CDATA[Nat Ritmeyer]]></name>
@@ -12,5 +12,131 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to debug HTTParty requests]]></title>
+    <link href="http://natritmeyer.com/blog/2013/09/09/how-to-debug-httparty-requests/"/>
+    <updated>2013-09-09T19:42:00+01:00</updated>
+    <id>http://natritmeyer.com/blog/2013/09/09/how-to-debug-httparty-requests</id>
+    <content type="html"><![CDATA[<p>I very frequently find myself debugging http calls. Curl makes it easy to do this through its <code>-v</code> switch that lets you see exactly what it&rsquo;s doing. For example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>curl -v http://www.google.co.uk
+</span><span class='line'>* About to connect<span class="o">()</span> to www.google.co.uk port 80 <span class="o">(</span><span class="c">#0)</span>
+</span><span class='line'>*   Trying 173.194.41.95... connected
+</span><span class='line'>* Connected to www.google.co.uk <span class="o">(</span>173.194.41.95<span class="o">)</span> port 80 <span class="o">(</span><span class="c">#0)</span>
+</span><span class='line'>&gt; GET / HTTP/1.1
+</span><span class='line'>&gt; User-Agent: curl/7.21.4 <span class="o">(</span>universal-apple-darwin11.0<span class="o">)</span> libcurl/7.21.4 OpenSSL/0.9.8x zlib/1.2.5
+</span><span class='line'>&gt; Host: www.google.co.uk
+</span><span class='line'>&gt; Accept: */*
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hostname-to-IP resolution, any SSL handshaking as well as full header details are on display. If you&rsquo;re doing a
+POST or PUT you get the body too. All very helpful.</p>
+
+<p>But, once I&rsquo;ve figured out what I need my code to do I need to translate my curl incantations into <a href="http://johnnunemaker.com/httparty/">HTTParty</a> &ndash; currently my favourite ruby http library. It is possible to get
+similar details out of httparty but it&rsquo;s a little esoteric.</p>
+
+<p>Here&rsquo;s a fairly representative use of httparty:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;httparty&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Google</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">HTTParty</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">base_uri</span> <span class="s2">&quot;http://www.google.co.uk&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">home_page</span>
+</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">get</span> <span class="s2">&quot;/&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">goog</span> <span class="o">=</span> <span class="no">Google</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="nb">puts</span> <span class="n">goog</span><span class="o">.</span><span class="n">home_page</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>But if I run that, I don&rsquo;t get any debug info (as expected):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>ruby httparty_debug.rb
+</span><span class='line'>&lt;!doctype html&gt;&lt;html <span class="nv">itemscope</span><span class="o">=</span><span class="s2">&quot;&quot;</span> <span class="nv">itemtype</span><span class="o">=</span><span class="s2">&quot;http://schema.org/WebPage&quot;</span>&gt;&lt;head&gt;&lt;meta ...
+</span><span class='line'>...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>No headers, no hostname-to-ip resulution, no SSL details.</p>
+
+<p>To get the debug info, add <code>debug_output $stdout</code> on a new line after <code>include HTTParty</code>, eg:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Google</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">HTTParty</span>
+</span><span class='line'>  <span class="n">debug_output</span> <span class="vg">$stdout</span> <span class="c1"># &lt;= this is it!</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">#...</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The result of running that will be a console filled with debug info!</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>ruby httparty_debug.rb
+</span><span class='line'>opening connection to www.google.co.uk:80...
+</span><span class='line'>opened
+</span><span class='line'>&lt;- <span class="s2">&quot;GET / HTTP/1.1\r\nConnection: close\r\nHost: www.google.co.uk\r\n\r\n&quot;</span>
+</span><span class='line'>-&gt; <span class="s2">&quot;HTTP/1.1 200 OK\r\n&quot;</span>
+</span><span class='line'>-&gt; <span class="s2">&quot;Date: Mon, 09 Sep 2013 18:59:12 GMT\r\n&quot;</span>
+</span><span class='line'>-&gt; <span class="s2">&quot;Expires: -1\r\n&quot;</span>
+</span><span class='line'>...
+</span><span class='line'>...
+</span><span class='line'>...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that if you&rsquo;d rather the debug info went to <code>$stderr</code>, change <code>debug_output $stdout</code> to <code>debug_output $stderr</code>.</p>
+
+<p>Hope that helps!</p>
+]]></content>
+  </entry>
   
 </feed>
