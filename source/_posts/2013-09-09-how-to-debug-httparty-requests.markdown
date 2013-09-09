@@ -53,7 +53,7 @@ $ ruby httparty_debug.rb
 ...
 ```
 
-No headers, no hostname-to-ip resulution, no SSL details.
+No headers, no hostname-to-ip resolution, no SSL details.
 
 To get the debug info, add `debug_output $stdout` on a new line after `include HTTParty`, eg:
 
