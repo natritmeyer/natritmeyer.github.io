@@ -4,7 +4,7 @@
   <title><![CDATA[Category: http, | NatRitmeyer.com]]></title>
   <link href="http://natritmeyer.com/blog/categories/http/atom.xml" rel="self"/>
   <link href="http://natritmeyer.com/"/>
-  <updated>2013-09-09T20:12:53+01:00</updated>
+  <updated>2013-09-09T20:20:44+01:00</updated>
   <id>http://natritmeyer.com/</id>
   <author>
     <name><![CDATA[Nat Ritmeyer]]></name>
@@ -69,7 +69,7 @@ $ ruby httparty_debug.rb
 ...
 </code></p>
 
-<p>No headers, no hostname-to-ip resulution, no SSL details.</p>
+<p>No headers, no hostname-to-ip resolution, no SSL details.</p>
 
 <p>To get the debug info, add <code>debug_output $stdout</code> on a new line after <code>include HTTParty</code>, eg:</p>
 
