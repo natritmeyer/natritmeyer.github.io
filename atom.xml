@@ -4,7 +4,7 @@
   <title><![CDATA[NatRitmeyer.com]]></title>
   <link href="http://natritmeyer.com/atom.xml" rel="self"/>
   <link href="http://natritmeyer.com/"/>
-  <updated>2013-09-10T18:03:15+01:00</updated>
+  <updated>2013-09-10T18:20:37+01:00</updated>
   <id>http://natritmeyer.com/</id>
   <author>
     <name><![CDATA[Nat Ritmeyer]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Libs required for ruby dev on Fedora 19]]></title>
+    <link href="http://natritmeyer.com/blog/2013/09/10/libs-required-for-ruby-dev-on-fedora-19/"/>
+    <updated>2013-09-10T18:12:00+01:00</updated>
+    <id>http://natritmeyer.com/blog/2013/09/10/libs-required-for-ruby-dev-on-fedora-19</id>
+    <content type="html"><![CDATA[<p>In setting up a <a href="https://fedoraproject.org/">Fedora 19</a> VM for web testing with <a href="https://www.google.com/chrome">Chrome</a>
+I found that I needed to install a few packages before things started to work. After some trial-and-error, I came up
+with the following command:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo yum install -y git vim gcc ruby ruby-devel libxml2 libxml2-devel libxslt libxslt-devel
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It should install everything you need to start coding in ruby (the above command assumes your code is stored in git and you&rsquo;re
+using vim) &ndash; I had particular trouble trying to get <a href="http://nokogiri.org/">nokogiri</a> to work. But the above command solved it :)</p>
+
+<p>Hope that helps!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How to disable Fedora's screensaver from the command line]]></title>

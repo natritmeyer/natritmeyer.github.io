@@ -5,13 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - NatRitmeyer.com</title>
+  <title>Libs required for ruby dev on Fedora 19 - NatRitmeyer.com</title>
   <meta name="author" content="Nat Ritmeyer">
 
   
-  <meta name="description" content="Blog Archive 2013 Libs required for ruby dev on Fedora 19
-Sep 10 2013 How to disable Fedora&#8217;s screensaver from the command line
-Sep 10 2013 &hellip;">
+  <meta name="description" content="In setting up a Fedora 19 VM for web testing with Chrome
+I found that I needed to install a few packages before things started to work. After some &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@ Sep 10 2013 &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://natritmeyer.com/blog/archives">
+  <link rel="canonical" href="http://natritmeyer.com/blog/2013/09/10/libs-required-for-ruby-dev-on-fedora-19">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="NatRitmeyer.com" type="application/atom+xml">
@@ -67,59 +66,90 @@ Sep 10 2013 &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
+    
+      <h1 class="entry-title">Libs Required for Ruby Dev on Fedora 19</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-10T18:12:00+01:00" pubdate data-updated="true">Sep 10<span>th</span>, 2013</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
 
 
+<div class="entry-content"><p>In setting up a <a href="https://fedoraproject.org/">Fedora 19</a> VM for web testing with <a href="https://www.google.com/chrome">Chrome</a>
+I found that I needed to install a few packages before things started to work. After some trial-and-error, I came up
+with the following command:</p>
 
-  
-  <h2>2013</h2>
-
-<article>
-  
-<h1><a href="/blog/2013/09/10/libs-required-for-ruby-dev-on-fedora-19/">Libs required for ruby dev on Fedora 19</a></h1>
-<time datetime="2013-09-10T18:12:00+01:00" pubdate><span class='month'>Sep</span> <span class='day'>10</span> <span class='year'>2013</span></time>
-
-
-</article>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo yum install -y git vim gcc ruby ruby-devel libxml2 libxml2-devel libxslt libxslt-devel
+</span></code></pre></td></tr></table></div></figure>
 
 
+<p>It should install everything you need to start coding in ruby (the above command assumes your code is stored in git and you&rsquo;re
+using vim) &ndash; I had particular trouble trying to get <a href="http://nokogiri.org/">nokogiri</a> to work. But the above command solved it :)</p>
 
-<article>
-  
-<h1><a href="/blog/2013/09/10/how-to-disable-fedoras-screensaver-from-the-command-line/">How to disable Fedora&#8217;s screensaver from the command line</a></h1>
-<time datetime="2013-09-10T17:56:00+01:00" pubdate><span class='month'>Sep</span> <span class='day'>10</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/devops/'>devops</a>, <a class='category' href='/blog/categories/fedora/'>fedora</a>, <a class='category' href='/blog/categories/gnome/'>gnome</a>, <a class='category' href='/blog/categories/vm/'>vm</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/09/09/how-to-debug-httparty-requests/">How to debug HTTParty requests</a></h1>
-<time datetime="2013-09-09T19:42:00+01:00" pubdate><span class='month'>Sep</span> <span class='day'>09</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/http/'>http,</a>, <a class='category' href='/blog/categories/httparty/'>httparty</a>, <a class='category' href='/blog/categories/ruby/'>ruby,</a></span>
-</footer>
-
-
-</article>
-
+<p>Hope that helps!</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Nat Ritmeyer</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-10T18:12:00+01:00" pubdate data-updated="true">Sep 10<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://natritmeyer.com/blog/2013/09/10/libs-required-for-ruby-dev-on-fedora-19/" data-via="natritmeyer" data-counturl="http://natritmeyer.com/blog/2013/09/10/libs-required-for-ruby-dev-on-fedora-19/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/09/10/how-to-disable-fedoras-screensaver-from-the-command-line/" title="Previous Post: How to disable Fedora's screensaver from the command line">&laquo; How to disable Fedora's screensaver from the command line</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>

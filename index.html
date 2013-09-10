@@ -9,8 +9,8 @@
   <meta name="author" content="Nat Ritmeyer">
 
   
-  <meta name="description" content="Today I found myself building a Fedora-based VM for running some tests that require chrome. I needed
-to be able to prevent the screensaver from &hellip;">
+  <meta name="description" content="In setting up a Fedora 19 VM for web testing with Chrome
+I found that I needed to install a few packages before things started to work. After some &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -39,7 +39,7 @@ to be able to prevent the screensaver from &hellip;">
   <header role="banner"><hgroup>
   <h1><a href="/">NatRitmeyer.com</a></h1>
   
-    <h2>An SDET's thoughts on test automation, TDD, BDD, ruby, CI and software development</h2>
+    <h2>An SDET's thoughts on test automation, TDD, BDD, ruby, CI, devops and software development</h2>
   
 </hgroup>
 
@@ -67,6 +67,54 @@ to be able to prevent the screensaver from &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/10/libs-required-for-ruby-dev-on-fedora-19/">Libs Required for Ruby Dev on Fedora 19</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-10T18:12:00+01:00" pubdate data-updated="true">Sep 10<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In setting up a <a href="https://fedoraproject.org/">Fedora 19</a> VM for web testing with <a href="https://www.google.com/chrome">Chrome</a>
+I found that I needed to install a few packages before things started to work. After some trial-and-error, I came up
+with the following command:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo yum install -y git vim gcc ruby ruby-devel libxml2 libxml2-devel libxslt libxslt-devel
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It should install everything you need to start coding in ruby (the above command assumes your code is stored in git and you&rsquo;re
+using vim) &ndash; I had particular trouble trying to get <a href="http://nokogiri.org/">nokogiri</a> to work. But the above command solved it :)</p>
+
+<p>Hope that helps!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -289,6 +337,10 @@ similar details out of httparty but it&rsquo;s a little esoteric.</p>
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/09/10/libs-required-for-ruby-dev-on-fedora-19/">Libs Required for Ruby Dev on Fedora 19</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/09/10/how-to-disable-fedoras-screensaver-from-the-command-line/">How to Disable Fedora&#8217;s Screensaver From the Command Line</a>
