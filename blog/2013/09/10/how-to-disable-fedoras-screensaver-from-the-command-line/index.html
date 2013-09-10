@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>about - NatRitmeyer.com</title>
+  <title>How to disable Fedora's screensaver from the command line - NatRitmeyer.com</title>
   <meta name="author" content="Nat Ritmeyer">
 
   
-  <meta name="description" content="About Aug 27th, 2013 Aug 27th, 2013 Tweet About Me A little something about me. Recent Posts How to Disable Fedora's Screensaver From the Command &hellip;">
+  <meta name="description" content="Today I found myself building a Fedora-based VM for running some tests that require chrome. I needed
+to be able to prevent the screensaver from &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://natritmeyer.com/about">
+  <link rel="canonical" href="http://natritmeyer.com/blog/2013/09/10/how-to-disable-fedoras-screensaver-from-the-command-line">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="NatRitmeyer.com" type="application/atom+xml">
@@ -65,32 +66,15 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">About</h1>
-    <p class="meta">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-27T17:24:00+01:00" pubdate data-updated="true">Aug 27<span>th</span>, 2013</time></p>
-  </header>
-  
-  
-
-  
-    <footer>
+    
+      <h1 class="entry-title">How to Disable Fedora's Screensaver From the Command Line</h1>
+    
+    
       <p class="meta">
         
-        
 
 
 
@@ -102,21 +86,75 @@
   
 
 
-<time datetime="2013-08-27T17:24:00+01:00" pubdate data-updated="true">Aug 27<span>th</span>, 2013</time>
+<time datetime="2013-09-10T17:56:00+01:00" pubdate data-updated="true">Sep 10<span>th</span>, 2013</time>
         
       </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Today I found myself building a Fedora-based VM for running some tests that require chrome. I needed
+to be able to prevent the screensaver from starting, and after a bit of googling I figured out how
+to do it. Here&rsquo;s the command you need to run:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>gsettings <span class="nb">set </span>org.gnome.desktop.session idle-delay 0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I tested this on Fedora 19 but I guess it should work on any Gnome 3 distro&hellip;</p>
+
+<p>Hope that helps!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
       
-        <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://natritmeyer.com/about/index.html" data-via="natritmeyer" data-counturl="http://natritmeyer.com/about/index.html" >Tweet</a>
+
+<span class="byline author vcard">Posted by <span class="fn">Nat Ritmeyer</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-10T17:56:00+01:00" pubdate data-updated="true">Sep 10<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/devops/'>devops</a>, <a class='category' href='/blog/categories/fedora/'>fedora</a>, <a class='category' href='/blog/categories/gnome/'>gnome</a>, <a class='category' href='/blog/categories/vm/'>vm</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://natritmeyer.com/blog/2013/09/10/how-to-disable-fedoras-screensaver-from-the-command-line/" data-via="natritmeyer" data-counturl="http://natritmeyer.com/blog/2013/09/10/how-to-disable-fedoras-screensaver-from-the-command-line/" >Tweet</a>
   
   
   
 </div>
 
+    
+    <p class="meta">
       
-    </footer>
-  
+        <a class="basic-alignment left" href="/blog/2013/09/09/how-to-debug-httparty-requests/" title="Previous Post: How to debug HTTParty requests">&laquo; How to debug HTTParty requests</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>

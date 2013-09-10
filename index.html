@@ -9,7 +9,8 @@
   <meta name="author" content="Nat Ritmeyer">
 
   
-  <meta name="description" content="I very frequently find myself debugging http calls. Curl makes it easy to do this through its -v switch that lets you see exactly what it&rsquo;s &hellip;">
+  <meta name="description" content="Today I found myself building a Fedora-based VM for running some tests that require chrome. I needed
+to be able to prevent the screensaver from &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +67,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/10/how-to-disable-fedoras-screensaver-from-the-command-line/">How to Disable Fedora&#8217;s Screensaver From the Command Line</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-10T17:56:00+01:00" pubdate data-updated="true">Sep 10<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Today I found myself building a Fedora-based VM for running some tests that require chrome. I needed
+to be able to prevent the screensaver from starting, and after a bit of googling I figured out how
+to do it. Here&rsquo;s the command you need to run:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>gsettings <span class="nb">set </span>org.gnome.desktop.session idle-delay 0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I tested this on Fedora 19 but I guess it should work on any Gnome 3 distro&hellip;</p>
+
+<p>Hope that helps!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -241,6 +289,10 @@ similar details out of httparty but it&rsquo;s a little esoteric.</p>
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/09/10/how-to-disable-fedoras-screensaver-from-the-command-line/">How to Disable Fedora&#8217;s Screensaver From the Command Line</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/09/09/how-to-debug-httparty-requests/">How to Debug HTTParty Requests</a>
