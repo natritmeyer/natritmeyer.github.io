@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: chrome | NatRitmeyer.com]]></title>
+  <link href="http://natritmeyer.com/blog/categories/chrome/atom.xml" rel="self"/>
+  <link href="http://natritmeyer.com/"/>
+  <updated>2013-09-11T17:58:05+01:00</updated>
+  <id>http://natritmeyer.com/</id>
+  <author>
+    <name><![CDATA[Nat Ritmeyer]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[A script to install chromedriver on linux]]></title>
+    <link href="http://natritmeyer.com/blog/2013/09/11/a-script-to-install-chromedriver-on-linux/"/>
+    <updated>2013-09-11T17:48:00+01:00</updated>
+    <id>http://natritmeyer.com/blog/2013/09/11/a-script-to-install-chromedriver-on-linux</id>
+    <content type="html"><![CDATA[<p>Installing <a href="https://code.google.com/p/chromedriver/">chromedriver</a> on linux can be annoying.
+Here&rsquo;s a script that takes the pain out of installing the <a href="https://code.google.com/p/chromedriver/downloads/list">latest</a>
+(at time of writing!) 64 bit version of the driver:</p>
+
+<p>```sh</p>
+
+<h1>!/bin/bash</h1>
+
+<p>wget <a href="https://chromedriver.googlecode.com/files/chromedriver_linux64_2.3.zip">https://chromedriver.googlecode.com/files/chromedriver_linux64_2.3.zip</a>
+unzip chromedriver_linux64_2.3.zip
+sudo cp chromedriver /usr/bin/chromedriver
+sudo chown root /usr/bin/chromedriver
+sudo chmod +x /usr/bin/chromedriver
+sudo chmod 755 /usr/bin/chromedriver
+```</p>
+
+<p>I&rsquo;ve tested it on Fedora 19.</p>
+
+<p>If you need a different version of the driver, just change the link on the first line of the script.</p>
+
+<p>Hope that helps!</p>
+]]></content>
+  </entry>
+  
+</feed>

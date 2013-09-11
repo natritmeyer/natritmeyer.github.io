@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: devops | NatRitmeyer.com]]></title>
-  <link href="http://natritmeyer.com/blog/categories/devops/atom.xml" rel="self"/>
+  <title><![CDATA[Category: linux | NatRitmeyer.com]]></title>
+  <link href="http://natritmeyer.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://natritmeyer.com/"/>
   <updated>2013-09-11T17:58:05+01:00</updated>
   <id>http://natritmeyer.com/</id>

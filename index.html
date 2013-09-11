@@ -9,8 +9,9 @@
   <meta name="author" content="Nat Ritmeyer">
 
   
-  <meta name="description" content="In setting up a Fedora 19 VM for web testing with Chrome
-I found that I needed to install a few packages before things started to work. After some &hellip;">
+  <meta name="description" content="Installing chromedriver on linux can be annoying.
+Here&rsquo;s a script that takes the pain out of installing the latest
+(at time of writing!) 64 bit &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +68,67 @@ I found that I needed to install a few packages before things started to work. A
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/11/a-script-to-install-chromedriver-on-linux/">A Script to Install Chromedriver on Linux</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-11T17:48:00+01:00" pubdate data-updated="true">Sep 11<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Installing <a href="https://code.google.com/p/chromedriver/">chromedriver</a> on linux can be annoying.
+Here&rsquo;s a script that takes the pain out of installing the <a href="https://code.google.com/p/chromedriver/downloads/list">latest</a>
+(at time of writing!) 64 bit version of the driver:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>wget https://chromedriver.googlecode.com/files/chromedriver_linux64_2.3.zip
+</span><span class='line'>unzip chromedriver_linux64_2.3.zip
+</span><span class='line'>sudo cp chromedriver /usr/bin/chromedriver
+</span><span class='line'>sudo chown root /usr/bin/chromedriver
+</span><span class='line'>sudo chmod +x /usr/bin/chromedriver
+</span><span class='line'>sudo chmod 755 /usr/bin/chromedriver
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I&rsquo;ve tested it on Fedora 19.</p>
+
+<p>If you need a different version of the driver, just change the link on the first line of the script.</p>
+
+<p>Hope that helps!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -337,6 +399,10 @@ similar details out of httparty but it&rsquo;s a little esoteric.</p>
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/09/11/a-script-to-install-chromedriver-on-linux/">A Script to Install Chromedriver on Linux</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/09/10/libs-required-for-ruby-dev-on-fedora-19/">Libs Required for Ruby Dev on Fedora 19</a>
