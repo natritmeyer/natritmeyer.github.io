@@ -3,7 +3,7 @@ layout: post
 title: "Libs required for ruby dev on Fedora 19"
 date: 2013-09-10 18:12
 comments: false
-categories: 
+categories: devops linux fedora ruby
 ---
 In setting up a [Fedora 19](https://fedoraproject.org/) VM for web testing with [Chrome](https://www.google.com/chrome)
 I found that I needed to install a few packages before things started to work. After some trial-and-error, I came up
