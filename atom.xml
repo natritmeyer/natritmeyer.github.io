@@ -4,7 +4,7 @@
   <title><![CDATA[NatRitmeyer.com]]></title>
   <link href="http://natritmeyer.com/atom.xml" rel="self"/>
   <link href="http://natritmeyer.com/"/>
-  <updated>2013-09-10T18:20:37+01:00</updated>
+  <updated>2013-09-11T17:46:24+01:00</updated>
   <id>http://natritmeyer.com/</id>
   <author>
     <name><![CDATA[Nat Ritmeyer]]></name>
@@ -23,7 +23,7 @@ I found that I needed to install a few packages before things started to work. A
 with the following command:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo yum install -y git vim gcc ruby ruby-devel libxml2 libxml2-devel libxslt libxslt-devel
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo yum install -y git vim gcc gcc-c++ ruby ruby-devel libxml2 libxml2-devel libxslt libxslt-devel
 </span></code></pre></td></tr></table></div></figure>
 
 
