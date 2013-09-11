@@ -10,7 +10,7 @@ I found that I needed to install a few packages before things started to work. A
 with the following command:
 
 ```sh
-$ sudo yum install -y git vim gcc ruby ruby-devel libxml2 libxml2-devel libxslt libxslt-devel
+$ sudo yum install -y git vim gcc gcc-c++ ruby ruby-devel libxml2 libxml2-devel libxslt libxslt-devel
 ```
 
 It should install everything you need to start coding in ruby (the above command assumes your code is stored in git and you're
