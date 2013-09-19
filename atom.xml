@@ -4,7 +4,7 @@
   <title><![CDATA[NatRitmeyer.com]]></title>
   <link href="http://natritmeyer.com/atom.xml" rel="self"/>
   <link href="http://natritmeyer.com/"/>
-  <updated>2013-09-11T17:58:05+01:00</updated>
+  <updated>2013-09-19T13:23:03+01:00</updated>
   <id>http://natritmeyer.com/</id>
   <author>
     <name><![CDATA[Nat Ritmeyer]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to mount a SMB share on Mac OS X]]></title>
+    <link href="http://natritmeyer.com/blog/2013/09/19/how-to-mount-a-smb-share-on-mac-os-x/"/>
+    <updated>2013-09-19T13:17:00+01:00</updated>
+    <id>http://natritmeyer.com/blog/2013/09/19/how-to-mount-a-smb-share-on-mac-os-x</id>
+    <content type="html"><![CDATA[<p>Mounting a remote SMB share on Mac OS X is done using the <code>mount_smbfs</code> tool. Here&rsquo;s how to do it:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#Create the mount point:</span>
+</span><span class='line'>mkdir share_name
+</span><span class='line'>
+</span><span class='line'><span class="c">#Mount the share:</span>
+</span><span class='line'>mount_smbfs //username:password@server.name/share_name share_name/
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When you&rsquo;re done with the share, unmount it with the following command:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>umount share_name/
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hope that helps!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A script to install chromedriver on linux]]></title>

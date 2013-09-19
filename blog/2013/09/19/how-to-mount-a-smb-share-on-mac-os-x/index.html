@@ -5,12 +5,17 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>How to disable Fedora's screensaver from the command line - NatRitmeyer.com</title>
+  <title>How to mount a SMB share on Mac OS X - NatRitmeyer.com</title>
   <meta name="author" content="Nat Ritmeyer">
 
   
-  <meta name="description" content="Today I found myself building a Fedora-based VM for running some tests that require chrome. I needed
-to be able to prevent the screensaver from &hellip;">
+  <meta name="description" content="Mounting a remote SMB share on Mac OS X is done using the mount_smbfs tool. Here&rsquo;s how to do it: 1
+2
+3
+4
+5
+#Create the mount point:
+mkdir &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +24,7 @@ to be able to prevent the screensaver from &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://natritmeyer.com/blog/2013/09/10/how-to-disable-fedoras-screensaver-from-the-command-line">
+  <link rel="canonical" href="http://natritmeyer.com/blog/2013/09/19/how-to-mount-a-smb-share-on-mac-os-x">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="NatRitmeyer.com" type="application/atom+xml">
@@ -70,7 +75,7 @@ to be able to prevent the screensaver from &hellip;">
   
   <header>
     
-      <h1 class="entry-title">How to Disable Fedora's Screensaver From the Command Line</h1>
+      <h1 class="entry-title">How to Mount a SMB Share on Mac OS X</h1>
     
     
       <p class="meta">
@@ -86,23 +91,34 @@ to be able to prevent the screensaver from &hellip;">
   
 
 
-<time datetime="2013-09-10T17:56:00+01:00" pubdate data-updated="true">Sep 10<span>th</span>, 2013</time>
+<time datetime="2013-09-19T13:17:00+01:00" pubdate data-updated="true">Sep 19<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Today I found myself building a Fedora-based VM for running some tests that require chrome. I needed
-to be able to prevent the screensaver from starting, and after a bit of googling I figured out how
-to do it. Here&rsquo;s the command you need to run:</p>
+<div class="entry-content"><p>Mounting a remote SMB share on Mac OS X is done using the <code>mount_smbfs</code> tool. Here&rsquo;s how to do it:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>gsettings <span class="nb">set </span>org.gnome.desktop.session idle-delay 0
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#Create the mount point:</span>
+</span><span class='line'>mkdir share_name
+</span><span class='line'>
+</span><span class='line'><span class="c">#Mount the share:</span>
+</span><span class='line'>mount_smbfs //username:password@server.name/share_name share_name/
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>I tested this on Fedora 19 but I guess it should work on any Gnome 3 distro&hellip;</p>
+<p>When you&rsquo;re done with the share, unmount it with the following command:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>umount share_name/
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Hope that helps!</p>
 </div>
@@ -127,21 +143,15 @@ to do it. Here&rsquo;s the command you need to run:</p>
   
 
 
-<time datetime="2013-09-10T17:56:00+01:00" pubdate data-updated="true">Sep 10<span>th</span>, 2013</time>
+<time datetime="2013-09-19T13:17:00+01:00" pubdate data-updated="true">Sep 19<span>th</span>, 2013</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/devops/'>devops</a>, <a class='category' href='/blog/categories/fedora/'>fedora</a>, <a class='category' href='/blog/categories/gnome/'>gnome</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/vm/'>vm</a>
-  
-</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://natritmeyer.com/blog/2013/09/10/how-to-disable-fedoras-screensaver-from-the-command-line/" data-via="natritmeyer" data-counturl="http://natritmeyer.com/blog/2013/09/10/how-to-disable-fedoras-screensaver-from-the-command-line/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://natritmeyer.com/blog/2013/09/19/how-to-mount-a-smb-share-on-mac-os-x/" data-via="natritmeyer" data-counturl="http://natritmeyer.com/blog/2013/09/19/how-to-mount-a-smb-share-on-mac-os-x/" >Tweet</a>
   
   
   
@@ -150,10 +160,8 @@ to do it. Here&rsquo;s the command you need to run:</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/09/09/how-to-debug-httparty-requests/" title="Previous Post: How to debug HTTParty requests">&laquo; How to debug HTTParty requests</a>
+        <a class="basic-alignment left" href="/blog/2013/09/11/a-script-to-install-chromedriver-on-linux/" title="Previous Post: A script to install chromedriver on linux">&laquo; A script to install chromedriver on linux</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/09/10/libs-required-for-ruby-dev-on-fedora-19/" title="Next Post: Libs required for ruby dev on Fedora 19">Libs required for ruby dev on Fedora 19 &raquo;</a>
       
     </p>
   </footer>

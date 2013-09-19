@@ -9,9 +9,13 @@
   <meta name="author" content="Nat Ritmeyer">
 
   
-  <meta name="description" content="Installing chromedriver on linux can be annoying.
-Here&rsquo;s a script that takes the pain out of installing the latest
-(at time of writing!) 64 bit &hellip;">
+  <meta name="description" content="Mounting a remote SMB share on Mac OS X is done using the mount_smbfs tool. Here&rsquo;s how to do it: 1
+2
+3
+4
+5
+#Create the mount point:
+mkdir &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +72,64 @@ Here&rsquo;s a script that takes the pain out of installing the latest
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/19/how-to-mount-a-smb-share-on-mac-os-x/">How to Mount a SMB Share on Mac OS X</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-19T13:17:00+01:00" pubdate data-updated="true">Sep 19<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Mounting a remote SMB share on Mac OS X is done using the <code>mount_smbfs</code> tool. Here&rsquo;s how to do it:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#Create the mount point:</span>
+</span><span class='line'>mkdir share_name
+</span><span class='line'>
+</span><span class='line'><span class="c">#Mount the share:</span>
+</span><span class='line'>mount_smbfs //username:password@server.name/share_name share_name/
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When you&rsquo;re done with the share, unmount it with the following command:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>umount share_name/
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hope that helps!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -399,6 +461,10 @@ similar details out of httparty but it&rsquo;s a little esoteric.</p>
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/09/19/how-to-mount-a-smb-share-on-mac-os-x/">How to Mount a SMB Share on Mac OS X</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/09/11/a-script-to-install-chromedriver-on-linux/">A Script to Install Chromedriver on Linux</a>
