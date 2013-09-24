@@ -4,7 +4,7 @@
   <title><![CDATA[NatRitmeyer.com]]></title>
   <link href="http://natritmeyer.com/atom.xml" rel="self"/>
   <link href="http://natritmeyer.com/"/>
-  <updated>2013-09-19T13:23:03+01:00</updated>
+  <updated>2013-09-24T22:11:03+01:00</updated>
   <id>http://natritmeyer.com/</id>
   <author>
     <name><![CDATA[Nat Ritmeyer]]></name>
@@ -12,6 +12,383 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A pattern for generating dynamic test data]]></title>
+    <link href="http://natritmeyer.com/blog/2013/09/24/a-pattern-for-generating-dynamic-test-data/"/>
+    <updated>2013-09-24T20:20:00+01:00</updated>
+    <id>http://natritmeyer.com/blog/2013/09/24/a-pattern-for-generating-dynamic-test-data</id>
+    <content type="html"><![CDATA[<p>When writing acceptance tests that use test data (and that&rsquo;s most of them), I like to deal with abstractions of that data rather than
+the data itself. The reasons for this are:</p>
+
+<ul>
+<li>Using abstractions leads to more expressive tests: <code>@expired_account</code> instead of <code>77481</code> better relays the intent of the test to the reader</li>
+<li>Using abstractions frees me from worrying about the details of the test data &ndash; no hard coded IDs!</li>
+<li>Lack of hard coded data means that when something needs to change I only need to change it in one place, leading to more robust and maintainable code</li>
+<li>Test code is code &ndash; it should adhere to all the usual best practices for coding; abstraction is one of them</li>
+</ul>
+
+
+<p>To illustrate this let&rsquo;s compare the following two chunks of code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@bob</span> <span class="o">=</span> <span class="no">Human</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="no">AccountService</span><span class="o">.</span><span class="n">create_account_for</span> <span class="vi">@bob</span>
+</span><span class='line'><span class="no">AccountService</span><span class="o">.</span><span class="n">should</span> <span class="n">have_account_for</span> <span class="vi">@bob</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&hellip;and&hellip;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@name</span> <span class="o">=</span> <span class="s2">&quot;Bob&quot;</span>
+</span><span class='line'><span class="vi">@age</span> <span class="o">=</span> <span class="mi">50</span>
+</span><span class='line'><span class="vi">@country</span> <span class="o">=</span> <span class="s2">&quot;Botswana&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">AccountService</span><span class="o">.</span><span class="n">create_account_for</span> <span class="vi">@name</span><span class="p">,</span> <span class="vi">@age</span><span class="p">,</span> <span class="vi">@country</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">xml</span> <span class="o">=</span> <span class="no">AccountService</span><span class="o">.</span><span class="n">account_details_for_user_with_details</span> <span class="vi">@name</span><span class="p">,</span> <span class="vi">@age</span><span class="p">,</span> <span class="vi">@country</span>
+</span><span class='line'><span class="n">xml</span><span class="o">.</span><span class="n">at_xpath</span><span class="p">(</span><span class="s2">&quot;//account/name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="vi">@name</span>
+</span><span class='line'><span class="n">xml</span><span class="o">.</span><span class="n">at_xpath</span><span class="p">(</span><span class="s2">&quot;//account/name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="vi">@age</span>
+</span><span class='line'><span class="n">xml</span><span class="o">.</span><span class="n">at_xpath</span><span class="p">(</span><span class="s2">&quot;//account/name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="vi">@country</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which one more quickly and clearly transmits the intent of the test to the reader? I&rsquo;d argue that the first does. The reader is not distracted with unnecessary details; instead they know they are creating a new generic <code>Human</code> object, creating an account with it and then verifying that the account has been created. The second one achieves the same thing but uses a lot more code &ndash; figuring out the intent of the test takes more time and effort; the result is less maintainable too.</p>
+
+<p>It doesn&rsquo;t take much work to use test data abstractions like <code>Human</code> and what little work is required is paid back many, many, many times over. Eg: creating the above <code>Human</code> class is as simple as this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;builder&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Human</span>
+</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:name</span>
+</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:age</span>
+</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:country</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span>
+</span><span class='line'>    <span class="vi">@name</span> <span class="o">=</span> <span class="s2">&quot;Bob&quot;</span>
+</span><span class='line'>    <span class="vi">@age</span> <span class="o">=</span> <span class="mi">50</span>
+</span><span class='line'>    <span class="vi">@country</span> <span class="o">=</span> <span class="s2">&quot;Botswana&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">to_xml</span>
+</span><span class='line'>    <span class="n">b</span> <span class="o">=</span> <span class="ss">Builder</span><span class="p">:</span><span class="ss">:XmlMarkup</span><span class="o">.</span><span class="n">new</span> <span class="ss">:indent</span> <span class="o">=&gt;</span> <span class="mi">2</span>
+</span><span class='line'>    <span class="n">b</span><span class="o">.</span><span class="n">instruct!</span> <span class="ss">:xml</span><span class="p">,</span> <span class="ss">:version</span> <span class="o">=&gt;</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="ss">:encoding</span> <span class="o">=&gt;</span> <span class="s2">&quot;utf-8&quot;</span>
+</span><span class='line'>    <span class="n">b</span><span class="o">.</span><span class="n">Human</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">b</span><span class="o">.</span><span class="n">name</span> <span class="vi">@name</span>
+</span><span class='line'>      <span class="n">b</span><span class="o">.</span><span class="n">age</span> <span class="vi">@age</span>
+</span><span class='line'>      <span class="n">b</span><span class="o">.</span><span class="n">country</span> <span class="vi">@country</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="n">b</span><span class="o">.</span><span class="n">target!</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&rsquo;s take a look at what&rsquo;s going on.</p>
+
+<p>The <code>initialize</code> method creates sensible default test data attributes when an instance of the <code>Human</code> class is created. The test data attributes are exposed using <code>attr_accessor</code>s so the test data object can be changed in the test. The <code>to_xml</code> method creates an XML representation of the human. This could just as well be a <code>to_json</code> method that spits out a json representation of the human*.</p>
+
+<p><sub>
+  * For those who take abstraction seriously this is a fine place to use the Template or Strategy patterns to decide between json and xml output at runtime.
+</sub></p>
+
+<p>Being able to create objects containing default test data that can be changed in the test will lead to more expressive test code (have I said that already?). Here&rsquo;s what I mean:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@baby</span> <span class="o">=</span> <span class="no">Human</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="vi">@baby</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="mi">1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The defaults, other than <code>age</code> are sensible, so we&rsquo;ll leave them. The only one we need to change is <code>age</code>, so we override the default value with <code>1</code>. Now that the <code>@baby</code> instance of <code>Human</code> has been created, when we see <code>@baby</code> in the test code it will read nicely:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">AccountService</span><span class="o">.</span><span class="n">create_account_for</span><span class="p">(</span><span class="vi">@baby</span><span class="p">)</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="ss">:too_young</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>But still, it would be nice to not have to change the age of <code>@baby</code> in the test &ndash; why can&rsquo;t this happen automatically?</p>
+
+<p>Well, by using the <a href="https://en.wikipedia.org/wiki/Factory_method_pattern">Factory pattern</a> you can create specific instances of test data without cluttering up your test code. Factory classes are those that create instances of other classes, hiding any complicated setup. Eg:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">HumanFactory</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">standard</span>
+</span><span class='line'>    <span class="no">Human</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">baby</span>
+</span><span class='line'>    <span class="n">human</span> <span class="o">=</span> <span class="no">Human</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>    <span class="n">human</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class='line'>    <span class="n">human</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">too_old</span>
+</span><span class='line'>    <span class="n">human</span> <span class="o">=</span> <span class="no">Human</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>    <span class="n">human</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="mi">500</span>
+</span><span class='line'>    <span class="n">human</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Methuselah&quot;</span>
+</span><span class='line'>    <span class="n">human</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#and to use the factory...</span>
+</span><span class='line'>
+</span><span class='line'><span class="vi">@standard</span> <span class="o">=</span> <span class="no">HumanFactory</span><span class="o">.</span><span class="n">standard</span>
+</span><span class='line'><span class="vi">@baby</span> <span class="o">=</span> <span class="no">HumanFactory</span><span class="o">.</span><span class="n">baby</span>
+</span><span class='line'><span class="vi">@geriatric</span> <span class="o">=</span> <span class="no">HumanFactory</span><span class="o">.</span><span class="n">too_old</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Thus far we are able to dynamically create objects that represent test data.</p>
+
+<p>There is one more important thing in this pattern &ndash; the separation between the data and the representation of the data. When we call <code>to_xml</code>, we get back a string containing an XML representation of the test data object. What&rsquo;s this for? Well, in your tests you can use the output of the method to pass to services, etc &ndash; that&rsquo;s what the <code>AccountService.create_account_for(@baby)</code> example is doing &ndash; the <code>to_xml</code> method would be called inside the <code>create_account_for</code> method.</p>
+
+<p>An essential attribute of the <code>to_xml</code> method is that however many times it is called, unless the data changes it should always return the same thing. For this reason the following would be bad:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;builder&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;active_support/time&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Human</span>
+</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:birthday</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span>
+</span><span class='line'>    <span class="c1">#@birthday not set to sensible default :(</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">to_xml</span>
+</span><span class='line'>    <span class="n">b</span> <span class="o">=</span> <span class="ss">Builder</span><span class="p">:</span><span class="ss">:XmlMarkup</span><span class="o">.</span><span class="n">new</span> <span class="ss">:indent</span> <span class="o">=&gt;</span> <span class="mi">2</span>
+</span><span class='line'>    <span class="n">b</span><span class="o">.</span><span class="n">instruct!</span> <span class="ss">:xml</span><span class="p">,</span> <span class="ss">:version</span> <span class="o">=&gt;</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="ss">:encoding</span> <span class="o">=&gt;</span> <span class="s2">&quot;utf-8&quot;</span>
+</span><span class='line'>    <span class="n">b</span><span class="o">.</span><span class="n">Human</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">b</span><span class="o">.</span><span class="n">birthday</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span> <span class="c1"># &lt;-- this is bad!</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="n">b</span><span class="o">.</span><span class="n">target!</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The problem with the above is that in the <code>to_xml</code> method there is a call to something that will change every time it is called; <code>Time.now</code>. To illustrate the point here&rsquo;s what happens when you create an instance of the above class and call <code>to_xml</code> on it lots of times:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>irb(main):030:0&gt; puts bob.to_xml
+</span><span class='line'>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+</span><span class='line'>&lt;Human&gt;
+</span><span class='line'>  &lt;birthday&gt;2013-09-24 21:35:14 +0100&lt;/birthday&gt;
+</span><span class='line'>&lt;/Human&gt;
+</span><span class='line'>=&gt; nil
+</span><span class='line'>irb(main):031:0&gt; puts bob.to_xml
+</span><span class='line'>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+</span><span class='line'>&lt;Human&gt;
+</span><span class='line'>  &lt;birthday&gt;2013-09-24 21:35:18 +0100&lt;/birthday&gt;
+</span><span class='line'>&lt;/Human&gt;
+</span><span class='line'>=&gt; nil
+</span><span class='line'>irb(main):032:0&gt; puts bob.to_xml
+</span><span class='line'>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+</span><span class='line'>&lt;Human&gt;
+</span><span class='line'>  &lt;birthday&gt;2013-09-24 21:35:25 +0100&lt;/birthday&gt;
+</span><span class='line'>&lt;/Human&gt;
+</span><span class='line'>=&gt; nil
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you can see, every time we call <code>bob.to_xml</code> his birthday changes. Not great. Instead, the <code>to_xml</code> code should be changed so that all it has to worry about is <em>presenting</em> the data. Here&rsquo;s how to do it:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;builder&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Human</span>
+</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:birthday</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span>
+</span><span class='line'>    <span class="vi">@birthday</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">to_xml</span>
+</span><span class='line'>    <span class="n">b</span> <span class="o">=</span> <span class="ss">Builder</span><span class="p">:</span><span class="ss">:XmlMarkup</span><span class="o">.</span><span class="n">new</span> <span class="ss">:indent</span> <span class="o">=&gt;</span> <span class="mi">2</span>
+</span><span class='line'>    <span class="n">b</span><span class="o">.</span><span class="n">instruct!</span> <span class="ss">:xml</span><span class="p">,</span> <span class="ss">:version</span> <span class="o">=&gt;</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="ss">:encoding</span> <span class="o">=&gt;</span> <span class="s2">&quot;utf-8&quot;</span>
+</span><span class='line'>    <span class="n">b</span><span class="o">.</span><span class="n">Human</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">b</span><span class="o">.</span><span class="n">birthday</span> <span class="vi">@birthday</span><span class="o">.</span><span class="n">strftime</span> <span class="s2">&quot;%Y-%m-%d&quot;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="n">b</span><span class="o">.</span><span class="n">target!</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This time, when we call <code>to_xml</code> a number of times, we&rsquo;ll see that as well as the data being static, it is also now presented correctly:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>irb(main):054:0&gt; bob = Human.new
+</span><span class='line'>=&gt; #&lt;Human:0x007fc1c1d44d80 @birthday=2013-09-24 21:38:19 +0100&gt;
+</span><span class='line'>irb(main):055:0&gt; puts bob.to_xml
+</span><span class='line'>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+</span><span class='line'>&lt;Human&gt;
+</span><span class='line'>  &lt;birthday&gt;2013-09-24&lt;/birthday&gt;
+</span><span class='line'>&lt;/Human&gt;
+</span><span class='line'>=&gt; nil
+</span><span class='line'>irb(main):056:0&gt; puts bob.to_xml
+</span><span class='line'>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+</span><span class='line'>&lt;Human&gt;
+</span><span class='line'>  &lt;birthday&gt;2013-09-24&lt;/birthday&gt;
+</span><span class='line'>&lt;/Human&gt;
+</span><span class='line'>=&gt; nil
+</span><span class='line'>irb(main):057:0&gt; puts bob.to_xml
+</span><span class='line'>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+</span><span class='line'>&lt;Human&gt;
+</span><span class='line'>  &lt;birthday&gt;2013-09-24&lt;/birthday&gt;
+</span><span class='line'>&lt;/Human&gt;
+</span><span class='line'>=&gt; nil
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Summary:</p>
+
+<ol>
+<li>Create test data classes that represent types of test data you use in your acceptance tests (eg: <code>class Human</code>)</li>
+<li>Expose attributes of those test data classes using accessors (eg: <code>attr_accessor :name</code>)</li>
+<li>Set any attributes in the test data class to sensible defaults in the <code>initialize</code> method</li>
+<li>Create <code>to_xml</code>/<code>to_json</code>/<code>to_csv</code>/etc rendering methods that will render the test data object in the formats required by your system under test</li>
+<li>Ensure that rendering methods do not include any logic other than presentation logic</li>
+<li>Use your test data classes in your test code</li>
+<li>#win</li>
+</ol>
+
+
+<p>Hope that helps!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How to mount a SMB share on Mac OS X]]></title>
