@@ -9,8 +9,8 @@
   <meta name="author" content="Nat Ritmeyer">
 
   
-  <meta name="description" content="When writing acceptance tests that use test data (and that&rsquo;s most of them), I like to deal with abstractions of that data rather than
-the data &hellip;">
+  <meta name="description" content="Running xpath queries shouldn&rsquo;t be hard. It used to be that you&rsquo;d have to install
+plugins into whatever browser you were using. They were &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,62 @@ the data &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/22/xpath-queries-in-chrome/">XPath Queries in Chrome</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-22T20:31:00+01:00" pubdate data-updated="true">Oct 22<span>nd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Running xpath queries shouldn&rsquo;t be hard. It used to be that you&rsquo;d have to install
+plugins into whatever browser you were using. They were often clumsy and always buggy.
+And, even though querying using CSS selectors has grown more popular in the
+automated-acceptance-web-test world, there are still sometimes that xpath is the only
+option.</p>
+
+<p>It turns out that Chrome has built in support for xpath queries in its dev tools. Simply
+run the following in the console tab:</p>
+
+<p><code>$x("your_xpath_here")</code></p>
+
+<p>For example, run the following command in the console when the <code>http://www.google.co.uk</code>
+page is loaded:</p>
+
+<p><code>$x("//input[@name='q']")</code></p>
+
+<p>Here&rsquo;s a screenshot of <code>$x("your_xpath")</code> in action:</p>
+
+<p><img src="/images/chrome_xpath.png" /></p>
+
+<p>Hope that helps!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -862,6 +918,10 @@ similar details out of httparty but it&rsquo;s a little esoteric.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/22/xpath-queries-in-chrome/">XPath Queries in Chrome</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/09/24/a-pattern-for-generating-dynamic-test-data/">A Pattern for Generating Dynamic Test Data</a>
       </li>
     
@@ -875,10 +935,6 @@ similar details out of httparty but it&rsquo;s a little esoteric.</p>
     
       <li class="post">
         <a href="/blog/2013/09/10/libs-required-for-ruby-dev-on-fedora-19/">Libs Required for Ruby Dev on Fedora 19</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/09/10/how-to-disable-fedoras-screensaver-from-the-command-line/">How to Disable Fedora&#8217;s Screensaver From the Command Line</a>
       </li>
     
   </ul>

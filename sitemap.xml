@@ -2,48 +2,52 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://natritmeyer.com/blog/2013/09/09/how-to-debug-httparty-requests/</loc>
-        <lastmod>2013-09-24T19:59:29+01:00</lastmod>
+        <lastmod>2013-10-22T20:30:31+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://natritmeyer.com/blog/2013/09/10/how-to-disable-fedoras-screensaver-from-the-command-line/
         </loc>
-        <lastmod>2013-09-24T19:59:29+01:00</lastmod>
+        <lastmod>2013-10-22T20:30:31+01:00</lastmod>
     </url>
     <url>
         <loc>http://natritmeyer.com/blog/2013/09/10/libs-required-for-ruby-dev-on-fedora-19/</loc>
-        <lastmod>2013-09-24T19:59:29+01:00</lastmod>
+        <lastmod>2013-10-22T20:30:31+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://natritmeyer.com/blog/2013/09/11/a-script-to-install-chromedriver-on-linux/
         </loc>
-        <lastmod>2013-09-24T19:59:29+01:00</lastmod>
+        <lastmod>2013-10-22T20:30:31+01:00</lastmod>
     </url>
     <url>
         <loc>http://natritmeyer.com/blog/2013/09/19/how-to-mount-a-smb-share-on-mac-os-x/</loc>
-        <lastmod>2013-09-24T19:59:29+01:00</lastmod>
+        <lastmod>2013-10-22T20:30:31+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://natritmeyer.com/blog/2013/09/24/a-pattern-for-generating-dynamic-test-data/
         </loc>
-        <lastmod>2013-09-24T22:10:20+01:00</lastmod>
+        <lastmod>2013-10-22T20:30:31+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://natritmeyer.com/blog/2013/10/22/xpath-queries-in-chrome/</loc>
+        <lastmod>2013-10-22T21:02:30+01:00</lastmod>
     </url>
     <url>
         <loc>http://natritmeyer.com/about/</loc>
-        <lastmod>2013-09-24T19:59:29+01:00</lastmod>
+        <lastmod>2013-10-22T20:30:31+01:00</lastmod>
     </url>
     <url>
         <loc>http://natritmeyer.com/blog/archives/</loc>
-        <lastmod>2013-09-24T22:10:20+01:00</lastmod>
+        <lastmod>2013-10-22T21:02:30+01:00</lastmod>
     </url>
     <url>
         <loc>http://natritmeyer.com/</loc>
-        <lastmod>2013-09-24T22:10:20+01:00</lastmod>
+        <lastmod>2013-10-22T21:02:30+01:00</lastmod>
     </url>
     <url>
         <loc>http://natritmeyer.com/robots.txt</loc>
-        <lastmod>2013-09-24T19:59:29+01:00</lastmod>
+        <lastmod>2013-10-22T20:30:31+01:00</lastmod>
     </url>
 </urlset>

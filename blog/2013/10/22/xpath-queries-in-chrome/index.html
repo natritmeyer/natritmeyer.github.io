@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: http, - NatRitmeyer.com</title>
+  <title>XPath Queries in Chrome - NatRitmeyer.com</title>
   <meta name="author" content="Nat Ritmeyer">
 
   
-  <meta name="description" content="Category: http,">
+  <meta name="description" content="Running xpath queries shouldn&rsquo;t be hard. It used to be that you&rsquo;d have to install
+plugins into whatever browser you were using. They were &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://natritmeyer.comblog/categories/http">
+  <link rel="canonical" href="http://natritmeyer.com/blog/2013/10/22/xpath-queries-in-chrome">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="NatRitmeyer.com" type="application/atom+xml">
@@ -65,35 +66,104 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Http,</h1>
+    
+      <h1 class="entry-title">XPath Queries in Chrome</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-22T20:31:00+01:00" pubdate data-updated="true">Oct 22<span>nd</span>, 2013</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>Running xpath queries shouldn&rsquo;t be hard. It used to be that you&rsquo;d have to install
+plugins into whatever browser you were using. They were often clumsy and always buggy.
+And, even though querying using CSS selectors has grown more popular in the
+automated-acceptance-web-test world, there are still sometimes that xpath is the only
+option.</p>
 
-  
-  <h2>2013</h2>
+<p>It turns out that Chrome has built in support for xpath queries in its dev tools. Simply
+run the following in the console tab:</p>
 
-<article>
-  
-<h1><a href="/blog/2013/09/09/how-to-debug-httparty-requests/">How to debug HTTParty requests</a></h1>
-<time datetime="2013-09-09T19:42:00+01:00" pubdate><span class='month'>Sep</span> <span class='day'>09</span> <span class='year'>2013</span></time>
+<p><code>$x("your_xpath_here")</code></p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/http/'>http,</a>, <a class='category' href='/blog/categories/httparty/'>httparty</a>, <a class='category' href='/blog/categories/ruby/'>ruby,</a></span>
-</footer>
+<p>For example, run the following command in the console when the <code>http://www.google.co.uk</code>
+page is loaded:</p>
 
+<p><code>$x("//input[@name='q']")</code></p>
 
-</article>
+<p>Here&rsquo;s a screenshot of <code>$x("your_xpath")</code> in action:</p>
 
+<p><img src="/images/chrome_xpath.png" /></p>
+
+<p>Hope that helps!</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Nat Ritmeyer</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-22T20:31:00+01:00" pubdate data-updated="true">Oct 22<span>nd</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/chrome/'>chrome</a>, <a class='category' href='/blog/categories/devtools/'>devtools</a>, <a class='category' href='/blog/categories/xpath/'>xpath</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://natritmeyer.com/blog/2013/10/22/xpath-queries-in-chrome/" data-via="natritmeyer" data-counturl="http://natritmeyer.com/blog/2013/10/22/xpath-queries-in-chrome/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/09/24/a-pattern-for-generating-dynamic-test-data/" title="Previous Post: A pattern for generating dynamic test data">&laquo; A pattern for generating dynamic test data</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>
