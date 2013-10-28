@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Libs required for ruby dev on Fedora 19 - NatRitmeyer.com</title>
+  <title>SitePrism 2.5 - NatRitmeyer.com</title>
   <meta name="author" content="Nat Ritmeyer">
 
   
-  <meta name="description" content="In setting up a Fedora 19 VM for web testing with Chrome
-I found that I needed to install a few packages before things started to work. After some &hellip;">
+  <meta name="description" content="SitePrism 2.5 is made up mainly of contributions from various people. From the HISTORY file: added ability to select iframe by index &ndash; thanks &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ I found that I needed to install a few packages before things started to work. A
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://natritmeyer.com/blog/2013/09/10/libs-required-for-ruby-dev-on-fedora-19">
+  <link rel="canonical" href="http://natritmeyer.com/blog/2013/10/28/siteprism-2-dot-5">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="NatRitmeyer.com" type="application/atom+xml">
@@ -70,7 +69,7 @@ I found that I needed to install a few packages before things started to work. A
   
   <header>
     
-      <h1 class="entry-title">Libs Required for Ruby Dev on Fedora 19</h1>
+      <h1 class="entry-title">SitePrism 2.5</h1>
     
     
       <p class="meta">
@@ -86,24 +85,74 @@ I found that I needed to install a few packages before things started to work. A
   
 
 
-<time datetime="2013-09-10T18:12:00+01:00" pubdate data-updated="true">Sep 10<span>th</span>, 2013</time>
+<time datetime="2013-10-28T18:53:00+00:00" pubdate data-updated="true">Oct 28<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>In setting up a <a href="https://fedoraproject.org/">Fedora 19</a> VM for web testing with <a href="https://www.google.com/chrome">Chrome</a>
-I found that I needed to install a few packages before things started to work. After some trial-and-error, I came up
-with the following command:</p>
+<div class="entry-content"><p>SitePrism 2.5 is made up mainly of contributions from various people. From the <a href="https://github.com/natritmeyer/site_prism/blob/master/HISTORY">HISTORY</a> file:</p>
+
+<ul>
+<li>added ability to select iframe by index &ndash; thanks to <a href="https://github.com/mikekelly">Mike Kelly</a></li>
+<li>site_prism now does lazy loading &ndash; thanks to <a href="https://github.com/mrsutter">MrSutter</a></li>
+<li>added config block and improved capybara integration &ndash; thanks to <a href="https://github.com/tmertens">tmertens</a> (and to <a href="https://github.com/LukasMac">LukasMac</a> for testing it)</li>
+<li>changed #set_url to convert its input to a string &ndash; thanks to <a href="https://github.com/modsognir">Jared Fraser</a></li>
+</ul>
+
+
+<p>Due to various lame excuses I&rsquo;ve taken ages to get this version out so please forgive me.</p>
+
+<p>To get an idea of the main functional changes, see the following sections of the <a href="https://github.com/natritmeyer/site_prism/blob/master/README.md">ReadMe</a>:</p>
+
+<ul>
+<li><a href="https://github.com/natritmeyer/site_prism#siteprism-configuration">SitePrism configuration to use capybara&rsquo;s implicit waits</a></li>
+</ul>
+
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo yum install -y git vim gcc gcc-c++ ruby ruby-devel libxml2 libxml2-devel libxslt libxslt-devel
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">SitePrism</span><span class="o">.</span><span class="n">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">use_implicit_waits</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'><span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>It should install everything you need to start coding in ruby (the above command assumes your code is stored in git and you&rsquo;re
-using vim) &ndash; I had particular trouble trying to get <a href="http://nokogiri.org/">nokogiri</a> to work. But the above command solved it :)</p>
+<ul>
+<li><a href="https://github.com/natritmeyer/site_prism#using-capybara-query-options">Ability to use capybara&rsquo;s query options in page object definitions and assertions</a></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">SearchResults</span> <span class="o">&lt;</span> <span class="ss">SitePrism</span><span class="p">:</span><span class="ss">:Page</span>
+</span><span class='line'>  <span class="n">element</span> <span class="ss">:view_more</span><span class="p">,</span> <span class="s2">&quot;li&quot;</span><span class="p">,</span> <span class="ss">text</span><span class="p">:</span> <span class="s2">&quot;View More&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="vi">@results_page</span><span class="o">.</span><span class="n">&lt;element_or_section_name</span><span class="o">&gt;</span> <span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s2">&quot;Welcome!&quot;</span>
+</span><span class='line'><span class="vi">@results_page</span><span class="o">.</span><span class="n">has_</span><span class="o">&lt;</span><span class="n">element_or_section_name</span><span class="o">&gt;</span><span class="p">?</span> <span class="ss">:count</span> <span class="o">=&gt;</span> <span class="mi">25</span>
+</span><span class='line'><span class="vi">@results_page</span><span class="o">.</span><span class="n">has_no_</span><span class="o">&lt;</span><span class="n">element_or_section_name</span><span class="o">&gt;</span><span class="p">?</span> <span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s2">&quot;Logout&quot;</span>
+</span><span class='line'><span class="vi">@results_page</span><span class="o">.</span><span class="n">wait_for_</span><span class="o">&lt;</span><span class="n">element_or_section_name</span><span class="o">&gt;</span> <span class="ss">:count</span> <span class="o">=&gt;</span> <span class="mi">25</span>
+</span><span class='line'><span class="vi">@results_page</span><span class="o">.</span><span class="n">wait_until_</span><span class="o">&lt;</span><span class="n">element_or_section_name</span><span class="o">&gt;</span><span class="n">_visible</span> <span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s2">&quot;Some ajaxy text appears!&quot;</span>
+</span><span class='line'><span class="vi">@results_page</span><span class="o">.</span><span class="n">wait_until_</span><span class="o">&lt;</span><span class="n">element_or_section_name</span><span class="o">&gt;</span><span class="n">_invisible</span> <span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s2">&quot;Some ajaxy text disappears!&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Both changes supplied by <a href="https://github.com/tmertens">tmertens</a>, both changes being the last 2 gripes I hear from people about SitePrism :)</p>
+
+<p>Thanks to <a href="https://github.com/LukasMac">LukasMac</a> for his extensive testing of this version.</p>
+
+<p>Finally, add your project or company to the <a href="https://github.com/natritmeyer/site_prism/wiki/Who-is-using-SitePrism">Who is using SitePrism</a> page. It would make my day!</p>
 
 <p>Hope that helps!</p>
 </div>
@@ -128,12 +177,12 @@ using vim) &ndash; I had particular trouble trying to get <a href="http://nokogi
   
 
 
-<time datetime="2013-09-10T18:12:00+01:00" pubdate data-updated="true">Sep 10<span>th</span>, 2013</time>
+<time datetime="2013-10-28T18:53:00+00:00" pubdate data-updated="true">Oct 28<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/devops/'>devops</a>, <a class='category' href='/blog/categories/fedora/'>fedora</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+    <a class='category' href='/blog/categories/browser-testing/'>browser_testing</a>, <a class='category' href='/blog/categories/gems/'>gems</a>, <a class='category' href='/blog/categories/page-object-model/'>page_object_model</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/site-prism/'>site_prism</a>, <a class='category' href='/blog/categories/test-automation/'>test_automation</a>
   
 </span>
 
@@ -142,7 +191,7 @@ using vim) &ndash; I had particular trouble trying to get <a href="http://nokogi
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://natritmeyer.com/blog/2013/09/10/libs-required-for-ruby-dev-on-fedora-19/" data-via="natritmeyer" data-counturl="http://natritmeyer.com/blog/2013/09/10/libs-required-for-ruby-dev-on-fedora-19/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://natritmeyer.com/blog/2013/10/28/siteprism-2-dot-5/" data-via="natritmeyer" data-counturl="http://natritmeyer.com/blog/2013/10/28/siteprism-2-dot-5/" >Tweet</a>
   
   
   
@@ -151,10 +200,8 @@ using vim) &ndash; I had particular trouble trying to get <a href="http://nokogi
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/09/10/how-to-disable-fedoras-screensaver-from-the-command-line/" title="Previous Post: How to disable Fedora's screensaver from the command line">&laquo; How to disable Fedora's screensaver from the command line</a>
+        <a class="basic-alignment left" href="/blog/2013/10/22/xpath-queries-in-chrome/" title="Previous Post: XPath Queries in Chrome">&laquo; XPath Queries in Chrome</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/09/11/a-script-to-install-chromedriver-on-linux/" title="Next Post: A script to install chromedriver on linux">A script to install chromedriver on linux &raquo;</a>
       
     </p>
   </footer>
