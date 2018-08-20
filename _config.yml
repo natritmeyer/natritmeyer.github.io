@@ -26,7 +26,7 @@ repository: "natritmeyer/natritmeyer.github.io"
 # twitter_username: jekyllrb
 # github_username:  jekyll
 
-theme: "minimal-mistakes-jekyll"
+remote_theme: "mmistakes/minimal-mistakes"
 minimal_mistakes_skin: "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum" "sunrise"
 
 
