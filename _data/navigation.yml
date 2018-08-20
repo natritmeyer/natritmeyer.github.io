@@ -1,0 +1,9 @@
+main:
+  - title: "Categories"
+    url: /categories/
+  - title: "Tags"
+    url: /tags/
+  - title: "Archive"
+    url: /year-archive/
+  - title: "CV/Resume"
+    url: /resume
