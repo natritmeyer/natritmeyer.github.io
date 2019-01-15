@@ -445,7 +445,7 @@ The `@Profile("desktop")` annotation acts as a kind of filter - this is how spri
 
 This page object that represents Bing's home page for desktops `implements BingHomePage`. I.e. it's an implementation of the `BingHomePage` interface. This allows `DesktopBingHomePage` to be injected into any constructor that asks for `BingHomePage`.
 
-The page object has a constructor that's annotated with `@Autowired`. So, when spring automagically creates an instance of this class (because it's annotated with the `@Component` annotation - see above), it'll inject it with a preexisting Webriver instance. We'll get to WebDriver management in a bit.
+The page object has a constructor that's annotated with `@Autowired`. So, when spring automagically creates an instance of this class (because it's annotated with the `@Component` annotation - see above), it'll inject it with a preexisting WebDriver instance. We'll get to WebDriver management in a bit.
 
 There are two methods in this class, both annotated `@Override`: `public void load()` and `public void searchFor(String searchTerm)`. These are the methods that fulfil the requirements of the `BingHomePage` interface - they're what actually get used by the step definition when the test is run.
 
