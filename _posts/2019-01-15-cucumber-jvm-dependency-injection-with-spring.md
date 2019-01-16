@@ -4,7 +4,7 @@ title: Cucumber-JVM Dependency Injection with Spring
 date: 2019-01-13
 categories: howto
 tags: [maven, cucumber, dependency injection, spring]
-excerpt: "How to set up your Cucumber JVM to use Dependency Injection using Spring"
+excerpt: "How to set up your Cucumber JVM project to use Dependency Injection with Spring"
 ---
 
 ## Introduction
