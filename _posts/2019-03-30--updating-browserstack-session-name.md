@@ -106,7 +106,7 @@ public void setBrowserStackSessionDetails(Scenario scenario) {
 
 Now that we've got something we want to send to BrowserStack we need to get a HTTP client ready.
 
-## Preparing the WebClient
+### Preparing the WebClient
 
 The old `resttemplate` way of doing things will be [deprecated in the near future](https://docs.spring.io/spring/docs/5.1.5.RELEASE/javadoc-api/org/springframework/web/client/RestTemplate.html) and replaced with `WebClient`. Its API isn't all that intuitive but it makes sense in the end. Here's how to set up a `WebClient``:
 
