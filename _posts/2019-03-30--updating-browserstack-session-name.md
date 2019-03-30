@@ -1,10 +1,10 @@
 ---
 layout: single
-title: Updating a BrowserStack session's name
+title: Updating a BrowserStack session's name and result
 date: 2019-03-30
 categories: howto
 tags: [maven, spring-flux, webclient, browserstack]
-excerpt: "How to update a BrowserStack's session name using Spring Flux's WebClient"
+excerpt: "How to update a BrowserStack's session name and result using Spring Flux's WebClient"
 ---
 
 ## Intro
