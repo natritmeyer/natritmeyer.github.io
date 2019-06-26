@@ -298,7 +298,7 @@ do that - it's the same as generating a unit or integration test report:
 
 ```xml
 <execution>
-  <id>created-merged-report</id>
+  <id>create-merged-report</id>
   <phase>post-integration-test</phase>
   <goals>
     <goal>report</goal>
@@ -324,7 +324,7 @@ If you run `mvn verify` now you should see the following:
 [INFO] Loading execution data file /Users/nat/dev/jacocoexample/target/jacoco-output/jacoco-unit-tests.exec
 [INFO] Writing merged execution data to /Users/nat/dev/jacocoexample/target/jacoco-output/merged.exec
 [INFO] 
-[INFO] --- jacoco-maven-plugin:0.8.4:report (created-merged-report) @ jacocoexample ---
+[INFO] --- jacoco-maven-plugin:0.8.4:report (create-merged-report) @ jacocoexample ---
 [INFO] Loading execution data file /Users/nat/dev/jacocoexample/target/jacoco-output/merged.exec
 [INFO] Analyzed bundle 'jacocoexample' with 3 classes
 ```
@@ -460,7 +460,7 @@ If you want the whole thing in one hit, here it is:
           </configuration>
         </execution>
         <execution>
-          <id>created-merged-report</id>
+          <id>create-merged-report</id>
           <phase>post-integration-test</phase>
           <goals>
             <goal>report</goal>
